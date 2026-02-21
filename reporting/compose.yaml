@@ -11,7 +11,7 @@ services:
     command:
       - "--path.rootfs=/host"
   ntopng:
-    image: ntop/ntopng:latest
+    image: ntop/ntopng:community
     container_name: ntopng
     restart: unless-stopped
     ports:
