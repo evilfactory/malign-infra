@@ -19,7 +19,7 @@ services:
     command:
       - -listen=0.0.0.0:2055
       - -transport=udp
-      -metrics.addr=0.0.0.0:9101
+      - -metrics.addr=0.0.0.0:9101
     ports:
       - "2055:2055/udp"
       - "9101:9101"
