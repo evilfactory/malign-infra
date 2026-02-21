@@ -10,17 +10,18 @@ services:
       - /:/host:ro,rslave
     command:
       - "--path.rootfs=/host"
-  ntopng:
-    image: ntop/ntopng:stable
-    container_name: ntopng
-    restart: unless-stopped
-    ports:
-      - "9101:9101"
-    privileged: true
-    volumes:
-      - ntopng_data:/var/lib/ntopng
-    command:
-      - "--http-port=9101"
-      - "--prometheus"
-volumes:
-  ntopng_data:
+
+#   ntopng:
+#     image: ntop/ntopng:latest
+#     container_name: ntopng
+#     restart: unless-stopped
+#     ports:
+#       - "9101:9101"
+#     privileged: true
+#     volumes:
+#       - ntopng_data:/var/lib/ntopng
+#     command:
+#       - "--http-port=9101"
+#       - "--prometheus"
+# volumes:
+#   ntopng_data:
