@@ -10,18 +10,15 @@ services:
       - /:/host:ro,rslave
     command:
       - "--path.rootfs=/host"
-
-#   ntopng:
-#     image: ntop/ntopng:latest
-#     container_name: ntopng
-#     restart: unless-stopped
-#     ports:
-#       - "9101:9101"
-#     privileged: true
-#     volumes:
-#       - ntopng_data:/var/lib/ntopng
-#     command:
-#       - "--http-port=9101"
-#       - "--prometheus"
-# volumes:
-#   ntopng_data:
+  pmacct:
+    image: pmacct/pmacct:latest
+    container_name: pmacct
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./pmacct/pmacct.conf:/etc/pmacct/pmacct.conf
+    command: >
+      pmacctd -f /etc/pmacct/pmacct.conf
