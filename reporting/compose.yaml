@@ -10,15 +10,3 @@ services:
       - /:/host:ro,rslave
     command:
       - "--path.rootfs=/host"
-  pmacct:
-    image: pmacct/pmacct:latest
-    container_name: pmacct
-    restart: unless-stopped
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-      - NET_RAW
-    volumes:
-      - ./pmacct/pmacct.conf:/etc/pmacct/pmacct.conf
-    command: >
-      pmacctd -f /etc/pmacct/pmacct.conf
