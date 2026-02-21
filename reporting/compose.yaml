@@ -10,3 +10,17 @@ services:
       - /:/host:ro,rslave
     command:
       - "--path.rootfs=/host"
+      - "--collector.textfile.directory=/host/var/lib/node_exporter/textfile_collector"
+
+  goflow2:
+    image: cloudflare/goflow2:latest
+    container_name: goflow2
+    restart: unless-stopped
+    command:
+      - -listen=0.0.0.0:2055
+      - -transport=udp
+      - -format=prometheus
+      - -addr=0.0.0.0:9101
+    ports:
+      - "2055:2055/udp"
+      - "9101:9101"
