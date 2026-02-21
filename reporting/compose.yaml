@@ -20,7 +20,6 @@ services:
     volumes:
       - ntopng_data:/var/lib/ntopng
     command:
-      - "-i=eth0"
       - "--http-port=9101"
       - "--prometheus"
 volumes:
