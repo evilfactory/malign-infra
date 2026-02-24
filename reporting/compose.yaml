@@ -10,4 +10,3 @@ services:
       - /:/host:ro,rslave
     command:
       - "--path.rootfs=/host"
-      - "--collector.textfile.directory=/host/var/lib/node_exporter/textfile_collector"
