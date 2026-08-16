@@ -30,6 +30,9 @@ services:
     depends_on:
       - db
       - cache
+    networks:
+      - default
+      - http-proxy
 
   db:
     image: ghcr.io/calagopus/pgautoupgrade:18-alpine
@@ -51,3 +54,7 @@ services:
       TZ: Europe/Berlin
     volumes:
       - ./cache:/data
+networks:
+  default:
+  http-proxy:
+    external: true
