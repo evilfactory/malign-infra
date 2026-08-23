@@ -11,6 +11,14 @@ services:
       - "${PANEL_DATA_DIR}/logs:/app/storage/logs"
       - "${PANEL_DATA_DIR}/nginx:/etc/nginx/http.d"
 
+    networks:
+      - http-proxy
+      - internal
+
+    labels:
+      caddy: "${PANEL_DOMAIN}"
+      caddy.reverse_proxy: "{{upstreams 80}}"
+
     environment:
       APP_ENV: "${APP_ENV}"
       APP_ENVIRONMENT_ONLY: "${APP_ENVIRONMENT_ONLY}"
@@ -41,9 +49,18 @@ services:
     image: redis:alpine
     restart: unless-stopped
 
+    networks:
+      - internal
+
     command: >
       redis-server
       --requirepass "${REDIS_PASSWORD}"
 
     volumes:
       - "${REDIS_DATA_DIR}:/data"
+
+networks:
+  http-proxy:
+    external: true
+
+  internal:
