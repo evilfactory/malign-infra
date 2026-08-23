@@ -3,9 +3,6 @@ services:
     image: ghcr.io/pterodactyl/panel:v1.14.1
     restart: unless-stopped
 
-    ports:
-      - "${PANEL_BIND_IP}:${PANEL_PORT}:80"
-
     volumes:
       - "${PANEL_DATA_DIR}/var:/app/var"
       - "${PANEL_DATA_DIR}/logs:/app/storage/logs"
