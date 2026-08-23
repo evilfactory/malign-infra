@@ -17,6 +17,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 80}}"
 
     environment:
+      APP_KEY: "${APP_KEY}"
       APP_ENV: "${APP_ENV}"
       APP_ENVIRONMENT_ONLY: "${APP_ENVIRONMENT_ONLY}"
       APP_URL: "${APP_URL}"
