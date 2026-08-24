@@ -8,6 +8,7 @@ services:
     environment:
       - CADDY_INGRESS_NETWORKS=http-proxy
     networks:
+      - default
       - http-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -17,6 +18,7 @@ services:
 networks:
   http-proxy:
     external: true
+  default:
 
 volumes:
   caddy_data: {}
