@@ -1,6 +1,6 @@
 services:
   panel:
-    image: ghcr.io/pterodactyl/panel:v1.14.1
+    image: ghcr.io/pterodactyl/panel:latest
     restart: unless-stopped
 
     volumes:
