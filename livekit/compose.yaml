@@ -3,6 +3,10 @@ services:
     image: livekit/livekit-server:latest
     restart: unless-stopped
 
+    labels:
+      caddy: "${LIVEKIT_DOMAIN}"
+      caddy.reverse_proxy: "{{upstreams 7880}}"
+
     environment:
       LIVEKIT_CONFIG: |
         port: 7880
@@ -23,7 +27,14 @@ services:
           urls:
             - ${LIVEKIT_WEBHOOK_URL}
 
+    networks:
+      - default
+      - http-proxy
+
     ports:
-      - "${LIVEKIT_HTTP_PORT}:7880"
       - "${LIVEKIT_RTC_TCP_PORT}:7881"
       - "${LIVEKIT_RTC_UDP_PORT}:7882/udp"
+
+networks:
+  http-proxy:
+    external: true
