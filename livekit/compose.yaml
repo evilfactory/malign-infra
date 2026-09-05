@@ -2,13 +2,29 @@ services:
   livekit:
     image: livekit/livekit-server:latest
     restart: unless-stopped
-    command: --config /etc/livekit.yaml
 
-    environment:
-      LIVEKIT_KEYS: "${LIVEKIT_API_KEY}: ${LIVEKIT_API_SECRET}"
+    command:
+      - /bin/sh
+      - -c
+      - |
+        cat > /tmp/livekit.yaml <<EOF
+        port: 7880
+        log_level: ${LIVEKIT_LOG_LEVEL}
 
-    volumes:
-      - "${LIVEKIT_CONFIG_PATH}:/etc/livekit.yaml:ro"
+        rtc:
+          tcp_port: 7881
+          udp_port: 7882
+          stun_servers:
+            - stun.l.google.com:19302
+            - stun1.l.google.com:19302
+
+        webhook:
+          api_key: ${LIVEKIT_WEBHOOK_API_KEY}
+          urls:
+            - ${LIVEKIT_WEBHOOK_URL}
+        EOF
+
+        exec livekit-server --config /tmp/livekit.yaml
 
     ports:
       - "${LIVEKIT_HTTP_PORT}:7880"
