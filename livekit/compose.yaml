@@ -8,6 +8,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 7880}}"
 
     environment:
+      NODE_IP: ${LIVEKIT_NODE_IP}
       LIVEKIT_CONFIG: |
         port: 7880
         log_level: ${LIVEKIT_LOG_LEVEL}
