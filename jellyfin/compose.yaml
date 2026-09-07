@@ -9,20 +9,9 @@ services:
       caddy: "${JELLYFIN_DOMAIN}"
       caddy.reverse_proxy: "{{upstreams 8096}}"
     volumes:
-      - /path/to/config:/config
-      - /path/to/cache:/cache
-      - type: bind
-        source: /path/to/media
-        target: /media
-      - type: bind
-        source: /path/to/media2
-        target: /media2
-        read_only: true
-      # Optional - extra fonts to be used during transcoding with subtitle burn-in
-      - type: bind
-        source: /path/to/fonts
-        target: /usr/local/share/fonts/custom
-        read_only: true
+      - jellyfin-config:/config
+      - jellyfin-cache:/cache
+      - ${MEDIA_PATH}:/media:ro
     networks:
       - default
       - http-proxy
@@ -36,4 +25,6 @@ services:
 networks:
   http-proxy:
     external: true
-
+volumes:
+  jellyfin-config:
+  jellyfin-cache:
