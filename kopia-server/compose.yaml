@@ -12,6 +12,8 @@ services:
       - --insecure
       - --server-username=${KOPIA_WEB_USERNAME}
       - --server-password=${KOPIA_WEB_PASSWORD}
+      - --server-control-username=${KOPIA_CONTROL_USERNAME}
+      - --server-control-password=${KOPIA_CONTROL_PASSWORD}
 
     environment:
       KOPIA_PASSWORD: ${KOPIA_REPOSITORY_PASSWORD}
