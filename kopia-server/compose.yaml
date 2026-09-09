@@ -1,0 +1,32 @@
+services:
+  kopia:
+    image: kopia/kopia:latest
+    container_name: kopia
+    hostname: kopia-server
+    restart: unless-stopped
+
+    command:
+      - server
+      - start
+      - --address=0.0.0.0:51515
+      - --server-username=${KOPIA_SERVER_USERNAME}
+      - --server-password=${KOPIA_SERVER_PASSWORD}
+
+    environment:
+      KOPIA_PASSWORD: ${KOPIA_REPOSITORY_PASSWORD}
+
+    ports:
+      - "${KOPIA_BIND_ADDRESS}:51515"
+
+    volumes:
+      - ${KOPIA_REPOSITORY_PATH}:/repository
+      - kopia_config:/app/config
+      - kopia_cache:/app/cache
+      - kopia_logs:/app/logs
+      - kopia_tmp:/tmp
+
+volumes:
+  kopia_config:
+  kopia_cache:
+  kopia_logs:
+  kopia_tmp:
