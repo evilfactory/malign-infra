@@ -10,6 +10,8 @@ services:
       - start
       - --address=0.0.0.0:51515
       - --insecure
+      - --server-control-username=${KOPIA_CONTROL_USERNAME}
+      - --server-control-password=${KOPIA_CONTROL_PASSWORD}
 
     environment:
       KOPIA_PASSWORD: ${KOPIA_REPOSITORY_PASSWORD}
