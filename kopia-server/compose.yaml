@@ -9,8 +9,7 @@ services:
       - server
       - start
       - --address=0.0.0.0:51515
-      - --server-username=${KOPIA_SERVER_USERNAME}
-      - --server-password=${KOPIA_SERVER_PASSWORD}
+      - --insecure
 
     environment:
       KOPIA_PASSWORD: ${KOPIA_REPOSITORY_PASSWORD}
