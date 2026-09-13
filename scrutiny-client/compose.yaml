@@ -1,0 +1,16 @@
+services:
+  scrutiny-collector:
+    image: ghcr.io/analogj/scrutiny:latest-collector
+    container_name: scrutiny-collector
+    restart: unless-stopped
+
+    cap_add:
+      - SYS_RAWIO
+
+    volumes:
+      - /run/udev:/run/udev:ro
+      - /dev:/dev
+
+    environment:
+      COLLECTOR_API_ENDPOINT: ${SCRUTINY_API_ENDPOINT}
+      COLLECTOR_HOST_ID: ${SCRUTINY_HOST_ID}
