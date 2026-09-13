@@ -6,6 +6,7 @@ services:
 
     cap_add:
       - SYS_RAWIO
+      - SYS_ADMIN
 
     volumes:
       - /run/udev:/run/udev:ro
