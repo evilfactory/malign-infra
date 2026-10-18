@@ -10,5 +10,5 @@ services:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
       - DOMAINS=${DOMAINS}
       - PROXIED=false
-      - IP6_PROVIDER=cloudflare.trace
-      - IP4_PROVIDER=cloudflare.trace
+      - IP6_PROVIDER=${IP6_PROVIDER:-cloudflare.trace}
+      - IP4_PROVIDER=${IP4_PROVIDER:-cloudflare.trace}
