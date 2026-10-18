@@ -15,8 +15,8 @@ services:
     restart: unless-stopped
     depends_on: [db]
     ports:
-      - "53:53/udp"
-      - "53:53/tcp"
+      - "${DNS_BIND_ADDRESS}:53:53/udp"
+      - "${DNS_BIND_ADDRESS}:53:53/tcp"
       - "${API_BIND_ADDRESS}:${API_PORT}:8081"
     environment:
       PDNS_gmysql_host: db
