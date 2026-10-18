@@ -1,0 +1,36 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+
+  pdns:
+    image: pschiffe/pdns-mysql:latest
+    restart: unless-stopped
+    depends_on: [db]
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "${API_BIND_ADDRESS}:${API_PORT}:8081"
+    environment:
+      PDNS_gmysql_host: db
+      PDNS_gmysql_dbname: ${MARIADB_DATABASE}
+      PDNS_gmysql_user: ${MARIADB_USER}
+      PDNS_gmysql_password: ${MARIADB_PASSWORD}
+      PDNS_primary: "yes"
+      PDNS_api: "yes"
+      PDNS_api_key: ${PDNS_API_KEY}
+      PDNS_webserver: "yes"
+      PDNS_webserver_address: 0.0.0.0
+      PDNS_webserver_allow_from: 127.0.0.1,172.16.0.0/12
+      PDNS_default_soa_content: ${SOA_CONTENT}
+      PDNS_default_ttl: "300"
+
+volumes:
+  db-data:
