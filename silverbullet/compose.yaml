@@ -1,0 +1,8 @@
+services:
+  silverbullet:
+    image: ghcr.io/silverbulletmd/silverbullet:latest
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    ports:
+      - 9880:3000
