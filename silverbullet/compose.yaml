@@ -4,5 +4,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./data:/data
-    ports:
-      - 9880:3000
+    labels:
+      caddy: "${DOMAIN}"
+      caddy.reverse_proxy: "{{upstreams 80}}"
