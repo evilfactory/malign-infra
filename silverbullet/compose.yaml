@@ -4,6 +4,12 @@ services:
     restart: unless-stopped
     volumes:
       - ./data:/data
+    networks:
+      - caddy
     labels:
       caddy: "${DOMAIN}"
       caddy.reverse_proxy: "{{upstreams 3000}}"
+
+networks:
+  caddy:
+    external: true
