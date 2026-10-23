@@ -6,4 +6,4 @@ services:
       - ./data:/data
     labels:
       caddy: "${DOMAIN}"
-      caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.reverse_proxy: "{{upstreams 3000}}"
