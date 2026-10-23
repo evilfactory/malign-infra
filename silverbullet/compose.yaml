@@ -5,11 +5,11 @@ services:
     volumes:
       - ./data:/data
     networks:
-      - caddy
+      - http-proxy
     labels:
       caddy: "${DOMAIN}"
       caddy.reverse_proxy: "{{upstreams 3000}}"
 
 networks:
-  caddy:
+  http-proxy:
     external: true
