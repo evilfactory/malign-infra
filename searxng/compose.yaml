@@ -35,10 +35,14 @@ configs:
   searxng_settings:
     content: |
       use_default_settings: true
+      general:
+        instance_name: "${INSTANCE_NAME}"
+      ui:
+        center_alignment: true
       server:
         secret_key: "${SEARXNG_SECRET}"
         limiter: false
-        image_proxy: true
+        image_proxy: false
       valkey:
         url: valkey://valkey:6379/0
       search:
